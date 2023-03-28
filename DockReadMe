@@ -1,0 +1,32 @@
+Below are the Dockerfile contents for MySqL, Rabbitmq and Vault
+
+
+# My SQL configuration
+FROM mysql:8.0
+
+ENV MYSQL_ROOT_PASSWORD admin
+ENV MYSQL_DATABASE      catalog
+ENV MYSQL_USER          devuser
+ENV MYSQL_PASSWORD      devpass
+
+EXPOSE 3306
+
+
+# Rabbitmq configuration
+
+FROM rabbitmq:3.11-management
+
+ENV RABBITMQ_DEFAULT_USER guest
+ENV RABBITMQ_DEFAULT_PASS guest
+
+EXPOSE 5672 15672
+
+# Valut Image configuration (container_name: vault)
+
+FROM vault:1.13.0 
+
+ENV VAULT_DEV_ROOT_TOKEN_ID 934f9eae-31ff-a8ef-e1ca-4bea9e07aa09
+
+EXPOSE 8200
+
+# cap_add:      - IPC_LOCK
